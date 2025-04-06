@@ -1,0 +1,19 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Redirect all requests to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [L]
+
+# Deny access to .htaccess file
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Deny access to sensitive files
+<FilesMatch "\.(env|json|log|ini|sh|bak|sql)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

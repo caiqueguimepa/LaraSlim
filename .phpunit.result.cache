@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Unit\\UserServiceTest::testStore":7},"times":{"Unit\\UserServiceTest::testStore":0.027,"Unit\\UserServiceTest::store":0.025,"Feature\\UserServiceTest::store":0.051,"Feature\\UserServiceTest::get":0.001}}

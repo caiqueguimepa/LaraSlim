@@ -1,0 +1,15 @@
+{
+  "status": "error",
+  "message": "Validation failed",
+  "errors": {
+    "name": [
+      "O campo nome é obrigatório."
+    ],
+    "email": [
+      "O campo email é obrigatório."
+    ],
+    "password": [
+      "O campo senha é obrigatório."
+    ]
+  }
+}
