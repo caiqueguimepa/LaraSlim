@@ -1,14 +1,14 @@
 <?php
 
-namespace SkeletonProjectPHP\Http\Controllers;
+namespace LaraSlim\Http\Controllers;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use SkeletonProjectPHP\DTOs\UserDTO;
-use SkeletonProjectPHP\Http\Request\UserRequest;
-use SkeletonProjectPHP\Services\UserServices;
+use LaraSlim\DTOs\UserDTO;
+use LaraSlim\Http\Request\UserRequest;
+use LaraSlim\Services\UserServices;
 
 class UserController
 {

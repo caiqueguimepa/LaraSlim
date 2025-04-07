@@ -1,6 +1,6 @@
 <?php
 
-namespace SkeletonProjectPHP\Karnel\Providers;
+namespace LaraSlim\Karnel\Providers;
 
 use Illuminate\Validation\Factory;
 use Illuminate\Translation\Translator;

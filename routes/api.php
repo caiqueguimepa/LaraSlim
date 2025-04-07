@@ -4,7 +4,7 @@
 /** @var \Slim\Factory\AppFactory $app */
 
 
-use SkeletonProjectPHP\Http\Controllers\UserController;
+use LaraSlim\Http\Controllers\UserController;
 use Slim\Routing\RouteCollectorProxy;
 
 $app->group('/api/v1', function (RouteCollectorProxy $group){

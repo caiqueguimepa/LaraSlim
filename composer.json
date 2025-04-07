@@ -1,7 +1,7 @@
 {
     "autoload": {
         "psr-4": {
-            "SkeletonProjectPHP\\": "app/",
+            "LaraSlim\\": "app/",
             "Tests\\": "tests/"
         }
     },
@@ -24,10 +24,10 @@
         "config/hellpers/functions.php"
     ],
     "scripts": {
-        "migration-create": "SkeletonProjectPHP\\Karnel\\Console\\Migration::create",
-        "controller-create": "SkeletonProjectPHP\\Karnel\\Console\\Controller::create",
-        "model-create": "SkeletonProjectPHP\\Karnel\\Console\\Model::create",
-        "request-create": "SkeletonProjectPHP\\Karnel\\Console\\FormRequest::create"
+        "migration-create": "LaraSlim\\Karnel\\Console\\Migration::create",
+        "controller-create": "LaraSlim\\Karnel\\Console\\Controller::create",
+        "model-create": "LaraSlim\\Karnel\\Console\\Model::create",
+        "request-create": "LaraSlim\\Karnel\\Console\\FormRequest::create"
     },
     "require-dev": {
         "pestphp/pest": "^3.8",

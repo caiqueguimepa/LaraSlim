@@ -1,9 +1,9 @@
 <?php
 
-namespace SkeletonProjectPHP\Services;
+namespace LaraSlim\Services;
 
-use SkeletonProjectPHP\DTOs\UserDTO;
-use SkeletonProjectPHP\Models\User;
+use LaraSlim\DTOs\UserDTO;
+use LaraSlim\Models\User;
 
 class UserServices
 {

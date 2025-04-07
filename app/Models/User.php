@@ -1,6 +1,6 @@
 <?php
 
-namespace SkeletonProjectPHP\Models;
+namespace LaraSlim\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
