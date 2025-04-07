@@ -1,4 +1,3 @@
-name: "Skeleton Project PHP"
 services:
   web:
     build: .
