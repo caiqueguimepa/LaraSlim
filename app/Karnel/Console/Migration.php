@@ -1,6 +1,6 @@
 <?php
 
-namespace SkeletonProjectPHP\Karnel\Console;
+namespace LaraSlim\Karnel\Console;
 
 class Migration
 {

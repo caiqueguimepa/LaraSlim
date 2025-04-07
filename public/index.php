@@ -1,7 +1,7 @@
 <?php
 
 
-use SkeletonProjectPHP\Karnel\Console\Migration;
+use LaraSlim\Karnel\Console\Migration;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../bootstrap/dotenv.php';

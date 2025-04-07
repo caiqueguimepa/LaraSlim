@@ -4,7 +4,7 @@
 use DI\Container;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use SkeletonProjectPHP\Karnel\Providers\ValidationServiceProvider;
+use LaraSlim\Karnel\Providers\ValidationServiceProvider;
 use Slim\Factory\AppFactory;
 
 $container = new Container();

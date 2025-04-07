@@ -1,5 +1,5 @@
 <?php
-namespace SkeletonProjectPHP\Http\Request;
+namespace LaraSlim\Http\Request;
 
 use Illuminate\Validation\Factory;
 

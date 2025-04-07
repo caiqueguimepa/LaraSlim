@@ -1,6 +1,6 @@
 <?php
 
-namespace SkeletonProjectPHP\Karnel\Console;
+namespace LaraSlim\Karnel\Console;
 
 use Composer\Script\Event;
 
@@ -31,7 +31,7 @@ class Controller
     }
     private static function verifyContainsSubDirectory(array $args): string
     {
-        $baseNamespace = 'SkeletonProjectPHP\Controllers';
+        $baseNamespace = 'LaraSlim\Controllers';
 
         if (str_contains($args[0], '/')) {
             $subDirectory = explode('/', $args[0])[0];

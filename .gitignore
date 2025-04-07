@@ -1,5 +1,5 @@
 .env
-./idea
-./vendor
-./docker/mysql_data
-phpunit.result
+/.idea
+/vendor
+/docker
+.phpunit.result.cache

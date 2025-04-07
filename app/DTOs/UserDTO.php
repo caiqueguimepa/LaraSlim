@@ -1,6 +1,6 @@
 <?php
 
-namespace SkeletonProjectPHP\DTOs;
+namespace LaraSlim\DTOs;
 
 class UserDTO
 {
