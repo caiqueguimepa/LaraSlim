@@ -11,3 +11,15 @@ if (!function_exists('env')) {
         return $value;
     }
 }
+if (!function_exists('app')){
+    function app(?string $abstract = null)
+    {
+        global $container;
+
+        if ($abstract) {
+            return $container->get($abstract);
+        }
+
+        return $container;
+    }
+}

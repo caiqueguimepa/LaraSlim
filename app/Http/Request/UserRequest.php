@@ -1,21 +1,17 @@
 <?php
 namespace LaraSlim\Http\Request;
-
-use Illuminate\Validation\Factory;
-
-class UserRequest
+class UserRequest extends BaseRequest
 {
-    public static function validate(array $data, Factory $validator)
+    protected function rules(): array
     {
-        $rules = [
+        return [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6'
         ];
-
-        return $validator->make($data, $rules, self::messages());
     }
-    public static function messages(): array
+
+    protected function messages(): array
     {
         return [
             'name.required' => 'O campo nome é obrigatório.',
@@ -27,7 +23,6 @@ class UserRequest
             'password.required' => 'O campo senha é obrigatório.',
             'password.min' => 'O campo senha deve ter no mínimo 6 caracteres.',
             'password.confirmed' => 'O campo senha deve ser confirmado.',
-
         ];
     }
 }

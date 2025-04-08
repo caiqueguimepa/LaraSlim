@@ -2,7 +2,6 @@
 
 namespace LaraSlim\Http\Controllers;
 
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -13,9 +12,7 @@ use LaraSlim\Services\UserServices;
 class UserController
 {
     public function __construct(
-
         private UserServices $userServices,
-        private ContainerInterface $container,
     )
     {
     }
@@ -31,14 +28,13 @@ class UserController
     public function store(Request $request, Response $response, array $args)
     {
 
-        $validator = UserRequest::validate(
+        $validator =(new UserRequest(
             [
                 'name' =>$request->getParsedBody()['name'] ?? null,
                 'email' =>$request->getParsedBody()['email'] ?? null,
                 'password' =>$request->getParsedBody()['password'] ?? null,
-            ],
-            $this->container->get('validator')
-        );
+            ])
+        )->validate();
 
         if ($validator->fails()) {
             $response->getBody()->write(json_encode([
