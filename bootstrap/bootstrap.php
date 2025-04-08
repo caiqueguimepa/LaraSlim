@@ -2,16 +2,19 @@
 
 
 use DI\Container;
+use LaraSlim\Karnel\Providers\AppServiceProvider;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use LaraSlim\Karnel\Providers\ValidationServiceProvider;
 use Slim\Factory\AppFactory;
 
+
 $container = new Container();
+
+$provider = new AppServiceProvider();
+$provider->register($container);
+
 AppFactory::setContainer($container);
 $app = AppFactory::create();
-
-ValidationServiceProvider::register($container);
 
 $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response, array $args) {
 

@@ -20,9 +20,6 @@
         "php-di/php-di": "^7.0",
         "illuminate/validation": "^12.7"
     },
-    "files": [
-        "config/hellpers/functions.php"
-    ],
     "scripts": {
         "migration-create": "LaraSlim\\Karnel\\Console\\Migration::create",
         "controller-create": "LaraSlim\\Karnel\\Console\\Controller::create",

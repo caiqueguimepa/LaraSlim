@@ -93,39 +93,19 @@ class FormRequest
 
 {$namespace}
 
-use Illuminate\Validation\Factory;
-
-class {$className}
+class {$className} extends BaseRequest
 {
-    /**
-     * Validate the incoming request data.
-     *
-     * @param array \$data The data to validate
-     * @param Factory \$validator The validator factory
-     * @return \Illuminate\Validation\Validator
-     */
-    public static function validate(array \$data, Factory \$validator)
-    {
-        \$rules = [
-            // Define your validation rules here
-            // Example: 'email' => 'required|email|unique:users',
-            // 'name' => 'required|string|max:255',
-        ];
-
-        return \$validator->make(\$data, \$rules, self::messages());
-    }
-
-    /**
-     * Get the validation error messages.
-     *
-     * @return array
-     */
-    public static function messages(): array
+    protected function rules(): array
     {
         return [
-            // Define your custom error messages here
-            // Example: 'email.required' => 'The email field is required.',
-            // 'name.required' => 'The name field is required.',
+            //'name' => 'required|string|max:255',
+        ];
+    }
+
+    protected function messages(): array
+    {
+        return [
+            //'email.required' => 'O campo email é obrigatório.',
         ];
     }
 }
