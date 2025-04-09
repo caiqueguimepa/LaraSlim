@@ -19,4 +19,12 @@ class UserDTO
           password_hash($this->password, PASSWORD_BCRYPT)
         );
     }
+    public function withoutPassword(): UserDTO
+    {
+        return new self(
+            $this->name,
+            $this->email,
+            ''
+        );
+    }
 }

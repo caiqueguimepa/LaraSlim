@@ -1,6 +1,6 @@
 <?php
 
-namespace LaraSlim\Http\Request;
+namespace LaraSlim\Karnel\Providers;
 
 use Illuminate\Validation\Factory;
 

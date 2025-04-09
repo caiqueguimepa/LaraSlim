@@ -1,5 +1,7 @@
 <?php
 namespace LaraSlim\Http\Request;
+use LaraSlim\Karnel\Providers\BaseRequest;
+
 class UserRequest extends BaseRequest
 {
     protected function rules(): array

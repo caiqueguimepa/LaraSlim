@@ -2,56 +2,111 @@
 
 namespace LaraSlim\Http\Controllers;
 
-use Psr\Http\Message\MessageInterface;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+
 use LaraSlim\DTOs\UserDTO;
 use LaraSlim\Http\Request\UserRequest;
+use LaraSlim\Karnel\Providers\Response;
 use LaraSlim\Services\UserServices;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class UserController
 {
     public function __construct(
         private UserServices $userServices,
     )
+    {}
+
+    public function index(ServerRequestInterface $request,ResponseInterface $response, array $args):ResponseInterface
     {
+        return (new Response($response))->json([
+            'status' => 'success',
+            'message' => 'User list retrieved successfully',
+            'users' => $this->userServices->all()
+        ]);
     }
-
-    public function index(Request $request,Response $response, array $args): MessageInterface|Response
-    {
-        $users = $this->userServices->all();
-
-        $response->getBody()
-            ->write(json_encode(['message' => 'Users retrieved successfully', 'users' => $users]));
-        return $response->withHeader('Content-Type', 'application/json');
-    }
-    public function store(Request $request, Response $response, array $args)
+    public function store(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
 
-        $validator =(new UserRequest(
-            [
-                'name' =>$request->getParsedBody()['name'] ?? null,
-                'email' =>$request->getParsedBody()['email'] ?? null,
-                'password' =>$request->getParsedBody()['password'] ?? null,
-            ])
-        )->validate();
+        $validator = (new UserRequest($request->getParsedBody()))->validate();
 
         if ($validator->fails()) {
-            $response->getBody()->write(json_encode([
+
+           return (new Response($response))->json([
                 'status' => 'error',
                 'message' => 'Validation failed',
                 'errors' => $validator->errors()
-            ]));
+            ], 422);
 
-            return $response
-                ->withHeader('Content-Type', 'application/json')
-                ->withStatus(422);
         }
 
         $user = $this->userServices->store(new UserDTO(...$request->getParsedBody()));
 
-        $response->getBody()->write(json_encode(['message' => 'User created successfully', 'user' => $user]));
-        return $response->withHeader('Content-Type', 'application/json');
+        return (new Response($response))->json([
+            'status' => 'success',
+            'message' => 'User created successfully',
+            'user' => $user
+        ], 201);
+    }
+    public function show(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $user = $this->userServices->find($args['id']);
+
+        if (!$user) {
+            return (new Response($response))->json([
+                'status' => 'error',
+                'message' => 'User not found'
+            ], 404);
+        }
+
+        return (new Response($response))->json([
+            'status' => 'success',
+            'message' => 'User retrieved successfully',
+            'user' => $user
+        ]);
+    }
+    public function update(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $validator = (new UserRequest($request->getParsedBody()))->validate();
+
+        if ($validator->fails()) {
+            return (new Response($response))->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $user = $this->userServices->update($args['id'], (new UserDTO(...$request->getParsedBody()))->withoutPassword());
+
+        if (!$user) {
+            return (new Response($response))->json([
+                'status' => 'error',
+                'message' => 'User not found'
+            ], 404);
+        }
+
+        return (new Response($response))->json([
+            'status' => 'success',
+            'message' => 'User updated successfully',
+            'user' => $user
+        ]);
+    }
+    public function delete(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $user = $this->userServices->delete($args['id']);
+
+        if (!$user) {
+            return (new Response($response))->json([
+                'status' => 'error',
+                'message' => 'User not found'
+            ], 404);
+        }
+
+        return (new Response($response))->json([
+            'status' => 'success',
+            'message' => 'User deleted successfully'
+        ]);
     }
 
 }

@@ -16,6 +16,8 @@ $provider->register($container);
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
+$app->addBodyParsingMiddleware();
+
 $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response, array $args) {
 
     $response->getBody()->write(json_encode([
