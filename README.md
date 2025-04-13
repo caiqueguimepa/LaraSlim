@@ -133,11 +133,10 @@ $app->get('/', [HomeController::class, 'index']);
 
 namespace LaraSlim\Controllers;
 
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Illuminate\Routing\Controller;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
-class HomeController extends Controller
+class HomeController
 {
     public function index()
     {
@@ -178,12 +177,12 @@ class UserRequest extends BaseRequest
 
 namespace LaraSlim\Http\Controllers;
 
-use Psr\Http\Message\MessageInterface;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use LaraSlim\DTOs\UserDTO;
 use LaraSlim\Http\Request\UserRequest;
+use LaraSlim\Karnel\Providers\Response;
 use LaraSlim\Services\UserServices;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class UserController
 {
@@ -192,33 +191,28 @@ class UserController
     )
     {}
   
-    public function store(Request $request, Response $response, array $args)
+     public function store(ServerRequestInterface $request, ResponseInterface $response, mixed $args): ResponseInterface
     {
 
-        $validator =(new UserRequest(
-            [
-                'name' =>$request->getParsedBody()['name'] ?? null,
-                'email' =>$request->getParsedBody()['email'] ?? null,
-                'password' =>$request->getParsedBody()['password'] ?? null,
-            ])
-        )->validate();
+        $validator = (new UserRequest($request->getParsedBody()))->validate();
 
         if ($validator->fails()) {
-            $response->getBody()->write(json_encode([
+
+           return (new Response($response))->json([
                 'status' => 'error',
                 'message' => 'Validation failed',
                 'errors' => $validator->errors()
-            ]));
+            ], 422);
 
-            return $response
-                ->withHeader('Content-Type', 'application/json')
-                ->withStatus(422);
         }
 
         $user = $this->userServices->store(new UserDTO(...$request->getParsedBody()));
 
-        $response->getBody()->write(json_encode(['message' => 'User created successfully', 'user' => $user]));
-        return $response->withHeader('Content-Type', 'application/json');
+        return (new Response($response))->json([
+            'status' => 'success',
+            'message' => 'User created successfully',
+            'user' => $user
+        ], 201);
     }
 
 }
