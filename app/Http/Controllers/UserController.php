@@ -17,7 +17,7 @@ class UserController
     )
     {}
 
-    public function index(ServerRequestInterface $request,ResponseInterface $response, array $args):ResponseInterface
+    public function index(ServerRequestInterface $request,ResponseInterface $response, mixed $args):ResponseInterface
     {
         return (new Response($response))->json([
             'status' => 'success',
@@ -25,7 +25,7 @@ class UserController
             'users' => $this->userServices->all()
         ]);
     }
-    public function store(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function store(ServerRequestInterface $request, ResponseInterface $response, mixed $args): ResponseInterface
     {
 
         $validator = (new UserRequest($request->getParsedBody()))->validate();
@@ -48,7 +48,7 @@ class UserController
             'user' => $user
         ], 201);
     }
-    public function show(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function show(ServerRequestInterface $request, ResponseInterface $response, mixed $args): ResponseInterface
     {
         $user = $this->userServices->find($args['id']);
 
@@ -65,11 +65,12 @@ class UserController
             'user' => $user
         ]);
     }
-    public function update(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function update(ServerRequestInterface $request, ResponseInterface $response, mixed $args): ResponseInterface
     {
         $validator = (new UserRequest($request->getParsedBody()))->validate();
 
         if ($validator->fails()) {
+
             return (new Response($response))->json([
                 'status' => 'error',
                 'message' => 'Validation failed',
@@ -92,7 +93,7 @@ class UserController
             'user' => $user
         ]);
     }
-    public function delete(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function delete(ServerRequestInterface $request, ResponseInterface $response, mixed $args): ResponseInterface
     {
         $user = $this->userServices->delete($args['id']);
 

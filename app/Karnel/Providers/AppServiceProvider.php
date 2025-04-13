@@ -14,7 +14,11 @@ class AppServiceProvider
             $provider->register($container);
         }
     }
-
+    /**
+     * Load the application configuration.
+     *
+     * @return array<string, mixed>
+     */
     private function loadProvider(): array
     {
         return  require_once __DIR__.'./../../../config/app.php';

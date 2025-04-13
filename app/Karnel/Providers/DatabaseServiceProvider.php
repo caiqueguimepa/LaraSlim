@@ -23,7 +23,7 @@ class DatabaseServiceProvider
 
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
-
+        /** @phpstan-ignore method.notFound */
         $container->set(Capsule::class, fn () => $capsule);
     }
 }

@@ -10,19 +10,28 @@ class UserServices
 
     public function store(UserDTO $userDTO): User
     {
-        return User::create([
-            'name' => $userDTO->name,
-            'email' => $userDTO->email,
-            'password' => password_hash($userDTO->password, PASSWORD_BCRYPT),
-        ]);
+        $user = new User();
+        $user->name = $userDTO->name;
+        $user->email = $userDTO->email;
+        $user->password = password_hash($userDTO->password, PASSWORD_BCRYPT);
+        $user->save();
+
+        return $user;
     }
+
+    /**
+     * @return Collection<int, User>
+     */
     public function all(): Collection
     {
         return User::all();
     }
     public function find(int $id): ?User
     {
-        return User::find($id) ?? null;
+        /** @var User|null $user */
+        $user = User::find($id);
+
+        return $user;
     }
     public function update(int $id, UserDTO $userDTO): ?User
     {

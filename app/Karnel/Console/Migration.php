@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaraSlim\Karnel\Console;
+
+use function DI\string;
 
 class Migration
 {
-    public static function create($event): void
+    public static function create(object $event): void
     {
         $args = self::getArguments($event);
 
@@ -13,7 +17,7 @@ class Migration
             return;
         }
 
-        $migrationName = $args[0];
+        $migrationName = (string)$args[0];
         $filename = self::generateMigrationFilename($migrationName);
         $template = self::generateMigrationTemplate($migrationName);
 
@@ -27,17 +31,20 @@ class Migration
             require_once $file;
         }
     }
-    private static function getArguments($event)
+    /**
+     * @return array<mixed,mixed>
+     */
+    private static function getArguments(object $event): array
     {
-        return $event instanceof \Composer\Script\Event ? $event->getArguments() : [$event];
+        return $event->getArguments() ?? [$event];
     }
-    private static function generateMigrationFilename($migrationName): string
+    private static function generateMigrationFilename(string $migrationName): string
     {
         $timestamp = date('Y_m_d_His');
         $directory = __DIR__ . '/../../../database/migrations/';
         return "{$directory}{$timestamp}_{$migrationName}.php";
     }
-    private static function generateMigrationTemplate($migrationName): string
+    private static function generateMigrationTemplate(string $migrationName): string
     {
         return <<<PHP
 <?php
@@ -57,6 +64,7 @@ if (!Capsule::schema()->hasTable('$migrationName')) {
 
 PHP;
     }
+    /** @phpstan-ignore method.unused */
     private static function findMigrationFile(string $migrationName): ?string
     {
         $migrationFiles = glob(__DIR__ . '/../../database/migrations/*_' . $migrationName . '.php');

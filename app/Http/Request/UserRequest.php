@@ -4,6 +4,12 @@ use LaraSlim\Karnel\Providers\BaseRequest;
 
 class UserRequest extends BaseRequest
 {
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, string> Array of validation rules where keys are field names and values are rules
+     */
     protected function rules(): array
     {
         return [
@@ -12,7 +18,11 @@ class UserRequest extends BaseRequest
             'password' => 'required|min:6'
         ];
     }
-
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array<string, string> Array of custom messages
+     */
     protected function messages(): array
     {
         return [

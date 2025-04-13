@@ -1,12 +1,12 @@
 <?php
 
-namespace LaraSlim\Karnel\Console;
+declare(strict_types=1);
 
-use Composer\Script\Event;
+namespace LaraSlim\Karnel\Console;
 
 class Model
 {
-    public static function create($event): void
+    public static function create(object $event): void
     {
         $args = self::getArguments($event);
 
@@ -14,7 +14,7 @@ class Model
             throw new \InvalidArgumentException('Model name must be provided');
         }
 
-        $modelName = $args[0];
+        $modelName = (string) $args[0];
         $namespace = self::verifyContainsSubDirectory($args);
         $className = self::getClassName($modelName);
         $tableName = self::getTableName($className);
@@ -37,7 +37,7 @@ class Model
         return lcfirst($className);
     }
 
-    private static function verifyContainsSubDirectory(array $args): string
+    private static function verifyContainsSubDirectory(mixed $args): string
     {
         $baseNamespace = 'SkeletonPhpApplication\Models';
 
@@ -48,10 +48,12 @@ class Model
 
         return "namespace {$baseNamespace};";
     }
-
-    private static function getArguments($event): array
+    /**
+     * @return array<mixed,mixed>
+     */
+    private static function getArguments(object $event): array
     {
-        return $event instanceof Event ? $event->getArguments() : [$event];
+        return $event->getArguments() ?? [$event];
     }
 
     private static function getClassName(string $modelName): string

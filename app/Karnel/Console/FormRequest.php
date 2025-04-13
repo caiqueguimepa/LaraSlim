@@ -1,13 +1,12 @@
 <?php
 
-namespace LaraSlim\Karnel\Console;
+declare(strict_types=1);
 
-use Composer\Script\Event;
-use Illuminate\Validation\Factory;
+namespace LaraSlim\Karnel\Console;
 
 class FormRequest
 {
-    public static function create($event): void
+    public static function create(object $event): void
     {
         $args = self::getArguments($event);
 
@@ -37,8 +36,10 @@ class FormRequest
         // Converte para camelCase (primeira letra minúscula)
         return lcfirst($className);
     }
-
-    private static function verifyContainsSubDirectory(array $args): string
+    /**
+     * @return string
+     */
+    private static function verifyContainsSubDirectory(mixed $args): string
     {
         $baseNamespace = 'SkeletonPhpApplication\Http\Requests';
 
@@ -50,9 +51,12 @@ class FormRequest
         return "namespace {$baseNamespace};";
     }
 
-    private static function getArguments($event): array
+    /**
+     * @return array<mixed,mixed>
+     */
+    private static function getArguments(object $event): array
     {
-        return $event instanceof Event ? $event->getArguments() : [$event];
+        return $event->getArguments() ?? [$event];
     }
 
     private static function getClassName(string $modelName): string

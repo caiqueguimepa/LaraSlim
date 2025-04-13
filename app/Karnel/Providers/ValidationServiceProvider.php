@@ -14,6 +14,7 @@ class ValidationServiceProvider
 {
     public function register(ContainerInterface $container): void
     {
+        /** @phpstan-ignore method.notFound */
         $container->set(Factory::class, function () use ($container) {
             $loader = new FileLoader(
                 new Filesystem,

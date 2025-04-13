@@ -1,12 +1,12 @@
 <?php
 
-namespace LaraSlim\Karnel\Console;
+declare(strict_types=1);
 
-use Composer\Script\Event;
+namespace LaraSlim\Karnel\Console;
 
 class Controller
 {
-    public static function create($event): void
+    public static function create(object $event): void
     {
         $args = self::getArguments($event);
 
@@ -29,7 +29,10 @@ class Controller
 
         echo "Controller {$className} created successfully at {$filePath}\n";
     }
-    private static function verifyContainsSubDirectory(array $args): string
+    /**
+     * @return string
+     */
+    private static function verifyContainsSubDirectory(mixed $args): string
     {
         $baseNamespace = 'LaraSlim\Controllers';
 
@@ -40,10 +43,12 @@ class Controller
 
         return "namespace {$baseNamespace};";
     }
-
-    private static function getArguments($event): array
+    /**
+     * @return array<mixed,mixed>
+     */
+    private static function getArguments(object $event): array
     {
-        return $event instanceof Event ? $event->getArguments() : [$event];
+        return $event->getArguments() ?? [$event];
     }
 
     private static function getClassName(string $controllerName): string
@@ -55,7 +60,7 @@ class Controller
 
     private static function getDirectoryPath(string $controllerName): string
     {
-        $basePath = __DIR__ . '/../../Controllers/';
+        $basePath = __DIR__ . '/../../Http/Controllers/';
 
         if (str_contains($controllerName, '/')) {
             $subDirectory = explode('/', $controllerName)[0];
@@ -83,11 +88,10 @@ class Controller
 <?php
 
 {$namespace}
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Illuminate\Routing\Controller;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
-class {$className} extends Controller
+class {$className}
 {
     public function __construct()
     {

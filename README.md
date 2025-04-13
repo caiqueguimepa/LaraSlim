@@ -37,6 +37,11 @@ LaraSlim é um framework PHP que combina a simplicidade do Slim Framework com a 
     ```sh
     cp .env.exemple .env
     ```
+
+5. Rodando pestphp e phpstan:
+    ```sh
+    composer test
+    ```
 Aplicação está rodando na porta 8001
 `http://localhost:8003`
 

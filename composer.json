@@ -21,6 +21,10 @@
         "illuminate/validation": "^12.7"
     },
     "scripts": {
+        "test": [
+            "vendor/bin/pest",
+            "vendor/bin/phpstan analyse app tests --level 6"
+        ],
         "migration-create": "LaraSlim\\Karnel\\Console\\Migration::create",
         "controller-create": "LaraSlim\\Karnel\\Console\\Controller::create",
         "model-create": "LaraSlim\\Karnel\\Console\\Model::create",
