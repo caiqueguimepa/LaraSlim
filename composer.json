@@ -28,7 +28,8 @@
     },
     "require-dev": {
         "pestphp/pest": "^3.8",
-        "pestphp/pest-plugin-drift": "^3.0"
+        "pestphp/pest-plugin-drift": "^3.0",
+        "phpstan/phpstan": "^2.1"
     },
     "config": {
         "allow-plugins": {
