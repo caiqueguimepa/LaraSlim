@@ -1,4 +1,6 @@
-# LaraSlim
+<p align="center">
+  <img src="https://i.postimg.cc/qq23mpW5/Chat-GPT-Image-14-de-abr-de-2025-08-09-53.png" alt="Logo LaraSlim" width="500px" />
+</p>
 
 ## Descrição
 
