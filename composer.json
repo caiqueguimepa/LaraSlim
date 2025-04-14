@@ -1,17 +1,24 @@
 {
-    "autoload": {
-        "psr-4": {
-            "LaraSlim\\": "app/",
-            "Tests\\": "tests/"
-        }
-    },
+    "name": "caiqueguimepa/laraslim",
+    "description": "Crie aplicações rapidamente com LaraSlim",
+    "type": "project",
+    "license": "MIT",
     "authors": [
         {
             "name": "Caique Bispo",
             "email": "caiquebispodanet86@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "LaraSlim\\": "app/",
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
+        "php": ">=8.0",
         "slim/slim": "4.*",
         "slim/psr7": "^1.7",
         "illuminate/database": "^12.7",
