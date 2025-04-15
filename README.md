@@ -1,81 +1,105 @@
+
 <p align="center">
-  <img src="https://i.postimg.cc/qq23mpW5/Chat-GPT-Image-14-de-abr-de-2025-08-09-53.png" alt="Logo LaraSlim" width="500px" />
+  <img src="https://i.postimg.cc/qq23mpW5/Chat-GPT-Image-14-de-abr-de-2025-08-09-53.png" alt="LaraSlim Logo" width="500px" />
 </p>
 
-[![Latest Stable Version](http://poser.pugx.org/caiquebispo/laraslim/v)](https://packagist.org/packages/caiquebispo/laraslim) [![Total Downloads](http://poser.pugx.org/caiquebispo/laraslim/downloads)](https://packagist.org/packages/caiquebispo/laraslim) [![Latest Unstable Version](http://poser.pugx.org/caiquebispo/laraslim/v/unstable)](https://packagist.org/packages/caiquebispo/laraslim) [![License](http://poser.pugx.org/caiquebispo/laraslim/license)](https://packagist.org/packages/caiquebispo/laraslim) [![PHP Version Require](http://poser.pugx.org/caiquebispo/laraslim/require/php)](https://packagist.org/packages/caiquebispo/laraslim)
+<p align="center">
+  <a href="https://packagist.org/packages/caiquebispo/laraslim"><img src="http://poser.pugx.org/caiquebispo/laraslim/v" alt="Latest Stable Version"></a>
+  <a href="https://packagist.org/packages/caiquebispo/laraslim"><img src="http://poser.pugx.org/caiquebispo/laraslim/downloads" alt="Total Downloads"></a>
+  <a href="https://packagist.org/packages/caiquebispo/laraslim"><img src="http://poser.pugx.org/caiquebispo/laraslim/v/unstable" alt="Latest Unstable Version"></a>
+  <a href="https://packagist.org/packages/caiquebispo/laraslim"><img src="http://poser.pugx.org/caiquebispo/laraslim/license" alt="License"></a>
+  <a href="https://packagist.org/packages/caiquebispo/laraslim"><img src="http://poser.pugx.org/caiquebispo/laraslim/require/php" alt="PHP Version Require"></a>
+</p>
 
-## Descrição
+## Description
 
-LaraSlim é um framework PHP que combina a simplicidade do Slim Framework com a robustez do Laravel. Ele é projetado para ser leve e fácil de usar, focdo em ciação de API.Esse projeto não inclui template engine, mas é possível integrar com o Blade do Laravel ou qualquer outro template engine de sua preferência.
-Esse projeto está em fase beta, portanto, pode conter bugs e funcionalidades em desenvolvimento. A ideia é criar uma estrutura semelhante ao Laravel, mas com uma abordagem mais leve e minimalista.
+**LaraSlim** is a microframework for PHP that combines the lightness of the [Slim Framework](https://www.slimframework.com/) with a structure inspired by [Laravel](https://laravel.com/). It's ideal for creating clean, modular APIs with a lightweight and fast setup.
 
-## Requisitos
+> **Note:** This project **does not include an authentication engine** by default. You can integrate your own or use third-party libraries.
 
-- Vesao do PHP 8.4
+It also doesn't include a template engine, but you can integrate it with Blade (Laravel) or any other engine of your choice.
+
+> ⚠️ This is a **beta** project: some features may be under development and bugs may occur.
+
+---
+
+## Requirements
+
+- PHP >= 8.4
 - Docker
 - Composer
 
-## Instalação do via composer
+---
 
-```sh
-  composer create-project caiquebispo/laraslim exemple_app
+## Installation via Composer
+
+```bash
+composer create-project caiquebispo/laraslim example_app
 ```
-## Instalação
 
-1. Clone o repositório:
-    ```sh
-    git clone https://github.com/caiquebispo/LaraSlim.git
-    cd LaraSlim
-    ```
+---
 
-2. Subindo container:
-    ```sh
-    docker compose up --build -d
-    ```
+## Manual Installation
 
-3. Entrando no contêiner:
-    ```sh
-    docker exec -it LaraSlim_app bash
-    ```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/caiquebispo/LaraSlim.git
+   cd LaraSlim
+   ```
 
-4. Instale as dependências:
-    ```sh
-    composer install
-    ```
+2. Start Docker containers:
+   ```bash
+   docker compose up --build -d
+   ```
 
-5. Configure o arquivo `.env`:
-    ```sh
-    cp .env.exemple .env
-    ```
+3. Access the container:
+   ```bash
+   docker exec -it LaraSlim_app bash
+   ```
 
-5. Rodando pestphp e phpstan:
-    ```sh
-    composer test
-    ```
-Aplicação está rodando na porta 8001
-`http://localhost:8003`
+4. Install dependencies:
+   ```bash
+   composer install
+   ```
 
-PHPMyAdmin está rodando na porta 8080
-`http://localhost:8080`
-user: root
-password: root
+5. Copy the `.env` file:
+   ```bash
+   cp .env.exemple .env
+   ```
 
+6. Run tests and checks:
+   ```bash
+   composer test
+   ```
 
-## Estrutura do Projeto
+---
 
-- `app/Http/Controllers`: Contém os controladores da aplicação.
-- `app/Http/Request`: Contém os arquivos de from validation.
-- `app/Models`: Contém os modelos da aplicação.
-- `app/DTOs`: Contém os DTOs da aplicação.'
-- `app/Services`: Contém os serviços da aplicação.
-- `app/Kernel`: Contém o arquivo de configuração.
-- `database/migrations`: Contém os arquivos de migração do banco de dados.
-- `public`: Contém os arquivos públicos acessíveis via web (ex: index.php).
-- `composer.json`: Arquivo de configuração do Composer.
+## Application Access
 
-## Configuração do Banco de Dados
+- API: `http://localhost:8003`
+- PHPMyAdmin: `http://localhost:8080`
+    - **User:** `root`
+    - **Password:** `root`
 
-O arquivo `.env` deve ser configurado com as informações do banco de dados. Exemplo para SQLite:
+---
+
+## Project Structure
+
+- `app/Http/Controllers`: Application controllers.
+- `app/Http/Request`: Form validation files.
+- `app/Models`: Data models.
+- `app/DTOs`: Data Transfer Objects.
+- `app/Services`: Business logic layer.
+- `app/Kernel`: Configuration and setup files.
+- `database/migrations`: Database migration files.
+- `public`: Web-accessible files (e.g., `index.php`).
+- `composer.json`: Composer configuration.
+
+---
+
+## Database Configuration
+
+Configure your `.env` file as needed. Example using SQLite:
 
 ```dotenv
 DB_CONNECTION="sqlite"
@@ -85,39 +109,40 @@ DB_USERNAME=""
 DB_PASSWORD=""
 ```
 
-## Uso
+---
 
-### Comandos
-Para criar uma nova migração, utilize o comando:
+## Useful Commands
 
-```sh
+Create a new migration:
+```bash
 composer migration-create profiles
 ```
-Para criar um novo model, utilize o comando:
 
-```sh
+Create a new model:
+```bash
 composer model-create Profiles
 ```
 
-Para criar um novo controler, utilize o comando:
-
-```sh
-composer controller-create ProfileCodntroller
+Create a new controller:
+```bash
+composer controller-create ProfileController
 composer controller-create Profiles/StoreController
 ```
-Para criar um novo from validation, utilize o comando:
 
-```sh
+Create a new form request:
+```bash
 composer request-create ProfileRequest
 ```
-### Executar Migrações
 
-As migrations são executadas automaticamente ao iniciar o contêiner:
+> Migrations are automatically executed when the container is started.
 
-### Exemplo de Grupo de Rotas
+---
+
+## Examples
+
+### Route Group
 
 ```php
-
 use Slim\Routing\RouteCollectorProxy;
 
 $app->group('/api', function (RouteCollectorProxy $group) {
@@ -125,40 +150,36 @@ $app->group('/api', function (RouteCollectorProxy $group) {
     $group->post('/users', 'UserController:store');
 });
 ```
-### Exemplo de Rotas
+
+### Simple Route
 
 ```php
-
-use Slim\Routing\RouteCollectorProxy;
-use LaraSlim\Controllers\HomeController; 
+use LaraSlim\Controllers\HomeController;
 
 $app->get('/', [HomeController::class, 'index']);
-
 ```
 
-### Exemplo de Controlador
+### Basic Controller
 
 ```php
 <?php
 
 namespace LaraSlim\Controllers;
 
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-
 class HomeController
 {
     public function index()
     {
-        // Lógica do controlador
+        // Controller logic here
     }
 }
 ```
-### Exemplo de Form Request
+
+### Form Request
 
 ```php
-
 <?php
+
 namespace LaraSlim\Http\Request;
 
 class UserRequest extends BaseRequest
@@ -173,14 +194,13 @@ class UserRequest extends BaseRequest
     protected function messages(): array
     {
         return [
-            //'email.required' => 'O campo email é obrigatório.',
+            //'email.required' => 'The email field is required.',
         ];
     }
 }
-
 ```
 
-### Exemplo de useo do Form Request no Controlador
+### Using Form Request in Controller
 
 ```php
 <?php
@@ -191,29 +211,21 @@ use LaraSlim\DTOs\UserDTO;
 use LaraSlim\Http\Request\UserRequest;
 use LaraSlim\Karnel\Providers\Response;
 use LaraSlim\Services\UserServices;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
 
 class UserController
 {
-    public function __construct(
-        private UserServices $userServices,
-    )
-    {}
-  
-     public function store(ServerRequestInterface $request, ResponseInterface $response, mixed $args): ResponseInterface
-    {
+    public function __construct(private UserServices $userServices) {}
 
+    public function store(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
         $validator = (new UserRequest($request->getParsedBody()))->validate();
 
         if ($validator->fails()) {
-
-           return (new Response($response))->json([
+            return (new Response($response))->json([
                 'status' => 'error',
                 'message' => 'Validation failed',
                 'errors' => $validator->errors()
             ], 422);
-
         }
 
         $user = $this->userServices->store(new UserDTO(...$request->getParsedBody()));
@@ -224,34 +236,18 @@ class UserController
             'user' => $user
         ], 201);
     }
-
 }
 ```
-## Autores
 
-- Caique Bispo (caiquebispodanet86@gmail.com)
+---
 
-## Licença
+## Author
 
-MIT License
+- **Caique Bispo**  
+  📧 caiquebispodanet86@gmail.com
 
-Copyright (c) 2025 Caique Bispo
+---
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## License
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
+This project is licensed under the terms of the [MIT License](LICENSE).
