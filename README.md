@@ -12,6 +12,11 @@ LaraSlim é um framework PHP que combina a simplicidade do Slim Framework com a 
 - Docker
 - Composer
 
+## Instalação do via composer
+
+```sh
+  composer create-project caiquebispo/laraslim exemple_app
+```
 ## Instalação
 
 1. Clone o repositório:
