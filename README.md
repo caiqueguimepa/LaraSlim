@@ -2,9 +2,12 @@
   <img src="https://i.postimg.cc/qq23mpW5/Chat-GPT-Image-14-de-abr-de-2025-08-09-53.png" alt="Logo LaraSlim" width="500px" />
 </p>
 
+[![Latest Stable Version](http://poser.pugx.org/caiquebispo/laraslim/v)](https://packagist.org/packages/caiquebispo/laraslim) [![Total Downloads](http://poser.pugx.org/caiquebispo/laraslim/downloads)](https://packagist.org/packages/caiquebispo/laraslim) [![Latest Unstable Version](http://poser.pugx.org/caiquebispo/laraslim/v/unstable)](https://packagist.org/packages/caiquebispo/laraslim) [![License](http://poser.pugx.org/caiquebispo/laraslim/license)](https://packagist.org/packages/caiquebispo/laraslim) [![PHP Version Require](http://poser.pugx.org/caiquebispo/laraslim/require/php)](https://packagist.org/packages/caiquebispo/laraslim)
+
 ## Descrição
 
-LaraSlim é um framework PHP que combina a simplicidade do Slim Framework com a robustez do Laravel. Ele é projetado para ser leve e fácil de usar, permitindo que você construa aplicações web rapidamente.
+LaraSlim é um framework PHP que combina a simplicidade do Slim Framework com a robustez do Laravel. Ele é projetado para ser leve e fácil de usar, focdo em ciação de API.Esse projeto não inclui template engine, mas é possível integrar com o Blade do Laravel ou qualquer outro template engine de sua preferência.
+Esse projeto está em fase beta, portanto, pode conter bugs e funcionalidades em desenvolvimento. A ideia é criar uma estrutura semelhante ao Laravel, mas com uma abordagem mais leve e minimalista.
 
 ## Requisitos
 

@@ -18,7 +18,7 @@
         }
     },
     "require": {
-        "php": ">=8.0",
+        "php": "^8.4",
         "slim/slim": "4.*",
         "slim/psr7": "^1.7",
         "illuminate/database": "^12.7",
