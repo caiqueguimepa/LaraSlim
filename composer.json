@@ -1,6 +1,6 @@
 {
     "name": "caiquebispo/laraslim",
-    "description": "Crie aplicações rapidamente com LaraSlim",
+    "description": "A lightweight PHP microframework combining Slim and Laravel features for fast and structured API development.",
     "type": "project",
     "license": "MIT",
     "authors": [
@@ -8,6 +8,22 @@
             "name": "Caique Bispo",
             "email": "caiquebispodanet86@gmail.com"
         }
+    ],
+    "keywords": [
+        "php",
+        "microframework",
+        "api",
+        "laravel",
+        "slim",
+        "framework",
+        "rest",
+        "mvc",
+        "composer",
+        "lightweight",
+        "backend",
+        "laravel-like",
+        "slim-framework",
+        "php-framework"
     ],
     "minimum-stability": "dev",
     "prefer-stable": true,
