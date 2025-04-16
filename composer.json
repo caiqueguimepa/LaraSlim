@@ -56,7 +56,8 @@
     "require-dev": {
         "pestphp/pest": "^3.8",
         "pestphp/pest-plugin-drift": "^3.0",
-        "phpstan/phpstan": "^2.1"
+        "phpstan/phpstan": "^2.1",
+        "laravel/pint": "^1.22"
     },
     "config": {
         "allow-plugins": {

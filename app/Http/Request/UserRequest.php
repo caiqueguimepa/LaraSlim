@@ -1,10 +1,11 @@
 <?php
+
 namespace LaraSlim\Http\Request;
+
 use LaraSlim\Karnel\Providers\BaseRequest;
 
 class UserRequest extends BaseRequest
 {
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -15,9 +16,10 @@ class UserRequest extends BaseRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
         ];
     }
+
     /**
      * Get custom messages for validator errors.
      *

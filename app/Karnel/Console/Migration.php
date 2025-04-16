@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace LaraSlim\Karnel\Console;
 
-use function DI\string;
-
 class Migration
 {
     public static function create(object $event): void
@@ -14,10 +12,11 @@ class Migration
 
         if (empty($args[0])) {
             echo "Erro: Nome da migration não informado.\n";
+
             return;
         }
 
-        $migrationName = (string)$args[0];
+        $migrationName = (string) $args[0];
         $filename = self::generateMigrationFilename($migrationName);
         $template = self::generateMigrationTemplate($migrationName);
 
@@ -25,12 +24,14 @@ class Migration
         chmod($filename, 0777);
         echo "Migration criada: $filename\n";
     }
+
     public static function loadMigrationFiles(): void
     {
-        foreach (glob(__DIR__ . '/../../../database/migrations/*.php') as $file) {
+        foreach (glob(__DIR__.'/../../../database/migrations/*.php') as $file) {
             require_once $file;
         }
     }
+
     /**
      * @return array<mixed,mixed>
      */
@@ -38,12 +39,15 @@ class Migration
     {
         return $event->getArguments() ?? [$event];
     }
+
     private static function generateMigrationFilename(string $migrationName): string
     {
         $timestamp = date('Y_m_d_His');
-        $directory = __DIR__ . '/../../../database/migrations/';
+        $directory = __DIR__.'/../../../database/migrations/';
+
         return "{$directory}{$timestamp}_{$migrationName}.php";
     }
+
     private static function generateMigrationTemplate(string $migrationName): string
     {
         return <<<PHP
@@ -64,10 +68,11 @@ if (!Capsule::schema()->hasTable('$migrationName')) {
 
 PHP;
     }
+
     /** @phpstan-ignore method.unused */
     private static function findMigrationFile(string $migrationName): ?string
     {
-        $migrationFiles = glob(__DIR__ . '/../../database/migrations/*_' . $migrationName . '.php');
+        $migrationFiles = glob(__DIR__.'/../../database/migrations/*_'.$migrationName.'.php');
 
         if (!empty($migrationFiles)) {
             return $migrationFiles[0];

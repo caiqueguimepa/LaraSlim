@@ -8,17 +8,18 @@ class UserDTO
         public string $name,
         public string $email,
         public string $password,
-    )
-    {
+    ) {
     }
-    public  function withPassword(): UserDTO
+
+    public function withPassword(): UserDTO
     {
         return new self(
-          $this->name,
-          $this->email,
-          password_hash($this->password, PASSWORD_BCRYPT)
+            $this->name,
+            $this->email,
+            password_hash($this->password, PASSWORD_BCRYPT)
         );
     }
+
     public function withoutPassword(): UserDTO
     {
         return new self(

@@ -43,11 +43,13 @@ class Model
 
         if (str_contains($args[0], '/')) {
             $subDirectory = explode('/', $args[0])[0];
+
             return "namespace {$baseNamespace}\\{$subDirectory};";
         }
 
         return "namespace {$baseNamespace};";
     }
+
     /**
      * @return array<mixed,mixed>
      */
@@ -60,16 +62,18 @@ class Model
     {
         $parts = explode('/', $modelName);
         $lastPart = end($parts);
+
         return ucfirst($lastPart);
     }
 
     private static function getDirectoryPath(string $modelName): string
     {
-        $basePath = __DIR__ . '/../../Models/';
+        $basePath = __DIR__.'/../../Models/';
 
         if (str_contains($modelName, '/')) {
             $subDirectory = explode('/', $modelName)[0];
-            return $basePath . $subDirectory . '/';
+
+            return $basePath.$subDirectory.'/';
         }
 
         return $basePath;
@@ -77,7 +81,7 @@ class Model
 
     private static function getFilePath(string $directoryPath, string $className): string
     {
-        return $directoryPath . $className . '.php';
+        return $directoryPath.$className.'.php';
     }
 
     private static function ensureDirectoryExists(string $directoryPath): void

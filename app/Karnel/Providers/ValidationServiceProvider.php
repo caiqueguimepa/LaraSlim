@@ -2,12 +2,12 @@
 
 namespace LaraSlim\Karnel\Providers;
 
-use Illuminate\Validation\Factory;
-use Illuminate\Translation\Translator;
+use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Translation\FileLoader;
+use Illuminate\Translation\Translator;
 use Illuminate\Validation\DatabasePresenceVerifier;
-use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Validation\Factory;
 use Psr\Container\ContainerInterface;
 
 class ValidationServiceProvider
@@ -17,8 +17,8 @@ class ValidationServiceProvider
         /** @phpstan-ignore method.notFound */
         $container->set(Factory::class, function () use ($container) {
             $loader = new FileLoader(
-                new Filesystem,
-                __DIR__ . '/../../resources/lang'
+                new Filesystem(),
+                __DIR__.'/../../resources/lang'
             );
 
             $translator = new Translator($loader, 'pt_BR');

@@ -29,20 +29,20 @@ class Controller
 
         echo "Controller {$className} created successfully at {$filePath}\n";
     }
-    /**
-     * @return string
-     */
+
     private static function verifyContainsSubDirectory(mixed $args): string
     {
         $baseNamespace = 'LaraSlim\Controllers';
 
         if (str_contains($args[0], '/')) {
             $subDirectory = explode('/', $args[0])[0];
+
             return "namespace {$baseNamespace}\\{$subDirectory};";
         }
 
         return "namespace {$baseNamespace};";
     }
+
     /**
      * @return array<mixed,mixed>
      */
@@ -55,16 +55,18 @@ class Controller
     {
         $parts = explode('/', $controllerName);
         $lastPart = end($parts);
+
         return ucfirst($lastPart);
     }
 
     private static function getDirectoryPath(string $controllerName): string
     {
-        $basePath = __DIR__ . '/../../Http/Controllers/';
+        $basePath = __DIR__.'/../../Http/Controllers/';
 
         if (str_contains($controllerName, '/')) {
             $subDirectory = explode('/', $controllerName)[0];
-            return $basePath . $subDirectory . '/';
+
+            return $basePath.$subDirectory.'/';
         }
 
         return $basePath;
@@ -72,7 +74,7 @@ class Controller
 
     private static function getFilePath(string $directoryPath, string $className): string
     {
-        return $directoryPath . $className . '.php';
+        return $directoryPath.$className.'.php';
     }
 
     private static function ensureDirectoryExists(string $directoryPath): void

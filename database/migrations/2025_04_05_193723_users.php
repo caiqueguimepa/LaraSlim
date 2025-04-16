@@ -13,6 +13,5 @@ if (!Capsule::schema()->hasTable('users')) {
         $table->string('remember_token')->nullable();
         $table->timestamps();
     });
-    
-}
 
+}
