@@ -16,12 +16,13 @@ abstract class BaseRequest
     /**
      * Constructor to initialize the data.
      *
-     * @param array<string, mixed> $data The data to be validated.
+     * @param  array<string, mixed>  $data  The data to be validated.
      */
     public function __construct(array $data = [])
     {
         $this->data = $data;
     }
+
     /**
      * Validate the data against the defined rules.
      *
@@ -40,12 +41,14 @@ abstract class BaseRequest
 
         return $validation;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, string> Array of validation rules where keys are field names and values are rules
      */
     abstract protected function rules(): array;
+
     /**
      * Get custom messages for validator errors.
      *

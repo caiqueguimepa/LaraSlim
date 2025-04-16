@@ -5,9 +5,9 @@ namespace LaraSlim\Services;
 use Illuminate\Database\Eloquent\Collection;
 use LaraSlim\DTOs\UserDTO;
 use LaraSlim\Models\User;
+
 class UserServices
 {
-
     public function store(UserDTO $userDTO): User
     {
         $user = new User();
@@ -26,6 +26,7 @@ class UserServices
     {
         return User::all();
     }
+
     public function find(int $id): ?User
     {
         /** @var User|null $user */
@@ -33,6 +34,7 @@ class UserServices
 
         return $user;
     }
+
     public function update(int $id, UserDTO $userDTO): ?User
     {
         $user = $this->find($id);
@@ -49,6 +51,7 @@ class UserServices
 
         return null;
     }
+
     public function delete(int $id): bool
     {
         $user = $this->find($id);

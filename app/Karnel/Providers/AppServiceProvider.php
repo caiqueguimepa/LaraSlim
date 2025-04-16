@@ -3,6 +3,7 @@
 namespace LaraSlim\Karnel\Providers;
 
 use Psr\Container\ContainerInterface;
+
 class AppServiceProvider
 {
     public function register(ContainerInterface $container): void
@@ -14,6 +15,7 @@ class AppServiceProvider
             $provider->register($container);
         }
     }
+
     /**
      * Load the application configuration.
      *
@@ -21,7 +23,6 @@ class AppServiceProvider
      */
     private function loadProvider(): array
     {
-        return  require_once __DIR__.'./../../../config/app.php';
+        return require_once __DIR__.'./../../../config/app.php';
     }
-
 }

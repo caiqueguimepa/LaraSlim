@@ -1,13 +1,11 @@
 <?php
 
-
 /** @var \Slim\Factory\AppFactory $app */
-
 
 use LaraSlim\Http\Controllers\UserController;
 use Slim\Routing\RouteCollectorProxy;
 
-$app->group('/api/v1', function (RouteCollectorProxy $group){
+$app->group('/api/v1', function (RouteCollectorProxy $group) {
 
     $group->get('/users', [UserController::class, 'index']);
     $group->post('/users', [UserController::class, 'store']);

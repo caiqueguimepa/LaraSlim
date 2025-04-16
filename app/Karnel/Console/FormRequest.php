@@ -36,15 +36,14 @@ class FormRequest
         // Converte para camelCase (primeira letra minúscula)
         return lcfirst($className);
     }
-    /**
-     * @return string
-     */
+
     private static function verifyContainsSubDirectory(mixed $args): string
     {
         $baseNamespace = 'SkeletonPhpApplication\Http\Requests';
 
         if (str_contains($args[0], '/')) {
             $subDirectory = explode('/', $args[0])[0];
+
             return "namespace {$baseNamespace}\\{$subDirectory};";
         }
 
@@ -63,16 +62,18 @@ class FormRequest
     {
         $parts = explode('/', $modelName);
         $lastPart = end($parts);
+
         return ucfirst($lastPart);
     }
 
     private static function getDirectoryPath(string $modelName): string
     {
-        $basePath = __DIR__ . '/../../Http/Request/';
+        $basePath = __DIR__.'/../../Http/Request/';
 
         if (str_contains($modelName, '/')) {
             $subDirectory = explode('/', $modelName)[0];
-            return $basePath . $subDirectory . '/';
+
+            return $basePath.$subDirectory.'/';
         }
 
         return $basePath;
@@ -80,7 +81,7 @@ class FormRequest
 
     private static function getFilePath(string $directoryPath, string $className): string
     {
-        return $directoryPath . $className . '.php';
+        return $directoryPath.$className.'.php';
     }
 
     private static function ensureDirectoryExists(string $directoryPath): void

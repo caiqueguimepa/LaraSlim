@@ -1,0 +1,22 @@
+{
+    "preset": "psr12",
+    "rules": {
+        "simplified_null_return": true,
+        "function_declaration": true,
+        "no_whitespace_in_blank_line": true,
+        "single_line_after_imports": true,
+        "visibility_required": true,
+        "ternary_operator_spaces": true,
+        "unary_operator_spaces": true,
+        "switch_case_semicolon_to_colon": true,
+        "statement_indentation": true,
+        "no_blank_lines_after_class_opening": true
+    },
+    "exclude": [
+        "tests",
+        "storage",
+        "config",
+        "bootstrap",
+        "vendor"
+    ]
+}
