@@ -6,82 +6,60 @@ namespace LaraSlim\Karnel\Console;
 
 class FormRequest
 {
-    public static function create(object $event): void
+    public static function create(string $requestName): void
     {
-        $args = self::getArguments($event);
-
-        if (empty($args[0])) {
-            throw new \InvalidArgumentException('Model name must be provided');
+        if (empty($requestName)) {
+            throw new \InvalidArgumentException('Request name must be provided');
         }
 
-        $modelName = $args[0];
-        $namespace = self::verifyContainsSubDirectory($args);
-        $className = self::getClassName($modelName);
-        $tableName = self::getTableName($className);
-        $directoryPath = self::getDirectoryPath($modelName);
-        $filePath = self::getFilePath($directoryPath, $className);
+        $namespace = self::generateNamespace($requestName);
+        $className = self::extractClassName($requestName);
+        $directoryPath = self::generateDirectoryPath($requestName);
+        $filePath = self::generateFilePath($directoryPath, $className);
 
         if (file_exists($filePath)) {
-            throw new \RuntimeException("Model {$className} already exists at {$filePath}");
+            throw new \RuntimeException("Request {$className} already exists at {$filePath}");
         }
 
         self::ensureDirectoryExists($directoryPath);
-        self::createModelFile($filePath, $className, $tableName, $namespace);
+        self::generateRequestFile($filePath, $className, $namespace);
 
-        echo "Model {$className} created successfully at {$filePath}\n";
+        echo "FormRequest {$className} created successfully at {$filePath}\n";
     }
 
-    private static function getTableName(string $className): string
-    {
-        // Converte para camelCase (primeira letra minúscula)
-        return lcfirst($className);
-    }
-
-    private static function verifyContainsSubDirectory(mixed $args): string
+    private static function generateNamespace(string $requestName): string
     {
         $baseNamespace = 'SkeletonPhpApplication\Http\Requests';
 
-        if (str_contains($args[0], '/')) {
-            $subDirectory = explode('/', $args[0])[0];
-
+        if (str_contains($requestName, '/')) {
+            $subDirectory = explode('/', $requestName)[0];
             return "namespace {$baseNamespace}\\{$subDirectory};";
         }
 
         return "namespace {$baseNamespace};";
     }
 
-    /**
-     * @return array<mixed,mixed>
-     */
-    private static function getArguments(object $event): array
+    private static function extractClassName(string $requestName): string
     {
-        return $event->getArguments() ?? [$event];
+        $parts = explode('/', $requestName);
+        return ucfirst(end($parts));
     }
 
-    private static function getClassName(string $modelName): string
+    private static function generateDirectoryPath(string $requestName): string
     {
-        $parts = explode('/', $modelName);
-        $lastPart = end($parts);
+        $basePath = __DIR__ . '/../../Http/Request/';
 
-        return ucfirst($lastPart);
-    }
-
-    private static function getDirectoryPath(string $modelName): string
-    {
-        $basePath = __DIR__.'/../../Http/Request/';
-
-        if (str_contains($modelName, '/')) {
-            $subDirectory = explode('/', $modelName)[0];
-
-            return $basePath.$subDirectory.'/';
+        if (str_contains($requestName, '/')) {
+            $subDirectory = explode('/', $requestName)[0];
+            return $basePath . $subDirectory . '/';
         }
 
         return $basePath;
     }
 
-    private static function getFilePath(string $directoryPath, string $className): string
+    private static function generateFilePath(string $directoryPath, string $className): string
     {
-        return $directoryPath.$className.'.php';
+        return $directoryPath . $className . '.php';
     }
 
     private static function ensureDirectoryExists(string $directoryPath): void
@@ -91,7 +69,7 @@ class FormRequest
         }
     }
 
-    private static function createModelFile(string $filePath, string $className, string $tableName, string $namespace): void
+    private static function generateRequestFile(string $filePath, string $className, string $namespace): void
     {
         $content = <<<PHP
 <?php
@@ -103,14 +81,14 @@ class {$className} extends BaseRequest
     protected function rules(): array
     {
         return [
-            //'name' => 'required|string|max:255',
+            // 'field' => 'required|string|max:255',
         ];
     }
 
     protected function messages(): array
     {
         return [
-            //'email.required' => 'O campo email é obrigatório.',
+            // 'field.required' => 'Este campo é obrigatório.',
         ];
     }
 }
@@ -118,6 +96,6 @@ class {$className} extends BaseRequest
 PHP;
 
         file_put_contents($filePath, $content);
-        chmod($filePath, 0777); // Permissões mais seguras
+        chmod($filePath, 0644); // Permissões seguras para leitura e escrita
     }
 }

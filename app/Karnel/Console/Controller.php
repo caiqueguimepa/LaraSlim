@@ -6,16 +6,13 @@ namespace LaraSlim\Karnel\Console;
 
 class Controller
 {
-    public static function create(object $event): void
+    public static function create(string $controllerName): void
     {
-        $args = self::getArguments($event);
-
-        if (empty($args[0])) {
+        if (empty($controllerName)) {
             throw new \InvalidArgumentException('Controller name must be provided');
         }
 
-        $controllerName = $args[0];
-        $namespace = self::verifyContainsSubDirectory($args);
+        $namespace = self::getNamespace($controllerName);
         $className = self::getClassName($controllerName);
         $directoryPath = self::getDirectoryPath($controllerName);
         $filePath = self::getFilePath($directoryPath, $className);
@@ -30,25 +27,19 @@ class Controller
         echo "Controller {$className} created successfully at {$filePath}\n";
     }
 
-    private static function verifyContainsSubDirectory(mixed $args): string
+    private static function getNamespace(string $controllerName): string
     {
-        $baseNamespace = 'LaraSlim\Controllers';
+        $baseNamespace = 'LaraSlim\\Controllers';
 
-        if (str_contains($args[0], '/')) {
-            $subDirectory = explode('/', $args[0])[0];
+        if (str_contains($controllerName, '/')) {
+            $subPaths = explode('/', $controllerName);
+            array_pop($subPaths); // remove class name
+            $subNamespace = implode('\\', array_map('ucfirst', $subPaths));
 
-            return "namespace {$baseNamespace}\\{$subDirectory};";
+            return "namespace {$baseNamespace}\\{$subNamespace};";
         }
 
         return "namespace {$baseNamespace};";
-    }
-
-    /**
-     * @return array<mixed,mixed>
-     */
-    private static function getArguments(object $event): array
-    {
-        return $event->getArguments() ?? [$event];
     }
 
     private static function getClassName(string $controllerName): string
@@ -56,17 +47,17 @@ class Controller
         $parts = explode('/', $controllerName);
         $lastPart = end($parts);
 
-        return ucfirst($lastPart);
+        return ucfirst($lastPart) . 'Controller';
     }
 
     private static function getDirectoryPath(string $controllerName): string
     {
-        $basePath = __DIR__.'/../../Http/Controllers/';
+        $basePath = __DIR__ . '/../../Http/Controllers/';
 
         if (str_contains($controllerName, '/')) {
-            $subDirectory = explode('/', $controllerName)[0];
+            $subDirectory = dirname(str_replace('/', DIRECTORY_SEPARATOR, $controllerName));
 
-            return $basePath.$subDirectory.'/';
+            return rtrim($basePath . $subDirectory, '/') . '/';
         }
 
         return $basePath;
@@ -74,12 +65,12 @@ class Controller
 
     private static function getFilePath(string $directoryPath, string $className): string
     {
-        return $directoryPath.$className.'.php';
+        return $directoryPath . $className . '.php';
     }
 
     private static function ensureDirectoryExists(string $directoryPath): void
     {
-        if (!file_exists($directoryPath)) {
+        if (!is_dir($directoryPath)) {
             mkdir($directoryPath, 0755, true);
         }
     }
