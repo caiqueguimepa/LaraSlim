@@ -76,6 +76,11 @@ composer create-project caiquebispo/laraslim example_app
    composer test
    ```
 ---
+9. Show all available commands:
+   ```bash
+   php artisan-slim
+   ```
+---
 
 ## Application Access
 
@@ -118,23 +123,22 @@ DB_PASSWORD=""
 
 Create a new migration:
 ```bash
-composer migration-create profiles
+php artisan-slim make:migration users
 ```
 
 Create a new model:
 ```bash
-composer model-create Profiles
+php artisan-slim make:model User
 ```
 
 Create a new controller:
 ```bash
-composer controller-create ProfileController
-composer controller-create Profiles/StoreController
+php artisan-slim make:controller UserController
 ```
 
 Create a new form request:
 ```bash
-composer request-create ProfileRequest
+php artisan-slim make:request UserRequest
 ```
 
 > Migrations are automatically executed when the container is started.
