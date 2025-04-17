@@ -6,16 +6,13 @@ namespace LaraSlim\Karnel\Console;
 
 class Model
 {
-    public static function create(object $event): void
+    public static function create(string $modelName): void
     {
-        $args = self::getArguments($event);
-
-        if (empty($args[0])) {
+        if (empty($modelName)) {
             throw new \InvalidArgumentException('Model name must be provided');
         }
 
-        $modelName = (string) $args[0];
-        $namespace = self::verifyContainsSubDirectory($args);
+        $namespace = self::getNamespace($modelName);
         $className = self::getClassName($modelName);
         $tableName = self::getTableName($className);
         $directoryPath = self::getDirectoryPath($modelName);
@@ -31,31 +28,19 @@ class Model
         echo "Model {$className} created successfully at {$filePath}\n";
     }
 
-    private static function getTableName(string $className): string
+    private static function getNamespace(string $modelName): string
     {
-        // Converte para camelCase (primeira letra minúscula)
-        return lcfirst($className);
-    }
+        $baseNamespace = 'SkeletonPhpApplication\\Models';
 
-    private static function verifyContainsSubDirectory(mixed $args): string
-    {
-        $baseNamespace = 'SkeletonPhpApplication\Models';
+        if (str_contains($modelName, '/')) {
+            $subPaths = explode('/', $modelName);
+            array_pop($subPaths); // remove class name
+            $subNamespace = implode('\\', array_map('ucfirst', $subPaths));
 
-        if (str_contains($args[0], '/')) {
-            $subDirectory = explode('/', $args[0])[0];
-
-            return "namespace {$baseNamespace}\\{$subDirectory};";
+            return "namespace {$baseNamespace}\\{$subNamespace};";
         }
 
         return "namespace {$baseNamespace};";
-    }
-
-    /**
-     * @return array<mixed,mixed>
-     */
-    private static function getArguments(object $event): array
-    {
-        return $event->getArguments() ?? [$event];
     }
 
     private static function getClassName(string $modelName): string
@@ -66,14 +51,21 @@ class Model
         return ucfirst($lastPart);
     }
 
+    private static function getTableName(string $className): string
+    {
+        // Converte o nome da classe para snake_case e pluraliza (opcional)
+        // Aqui está simples: apenas camelCase (primeira letra minúscula)
+        return lcfirst($className);
+    }
+
     private static function getDirectoryPath(string $modelName): string
     {
-        $basePath = __DIR__.'/../../Models/';
+        $basePath = __DIR__ . '/../../Models/';
 
         if (str_contains($modelName, '/')) {
-            $subDirectory = explode('/', $modelName)[0];
+            $subDirectory = dirname(str_replace('/', DIRECTORY_SEPARATOR, $modelName));
 
-            return $basePath.$subDirectory.'/';
+            return rtrim($basePath . $subDirectory, '/') . '/';
         }
 
         return $basePath;
@@ -81,12 +73,12 @@ class Model
 
     private static function getFilePath(string $directoryPath, string $className): string
     {
-        return $directoryPath.$className.'.php';
+        return $directoryPath . $className . '.php';
     }
 
     private static function ensureDirectoryExists(string $directoryPath): void
     {
-        if (!file_exists($directoryPath)) {
+        if (!is_dir($directoryPath)) {
             mkdir($directoryPath, 0755, true);
         }
     }
@@ -109,7 +101,6 @@ class {$className} extends Model
     protected \$fillable = [
         // Add your fillable fields here
     ];
-
 
     // Add your model methods, relationships, etc. here
 }

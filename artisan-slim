@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+if(!file_exists(__DIR__ . '/vendor/autoload.php')) {
+    echo 'Please run "composer install" first.' . PHP_EOL;
+    exit(1);
+}
+require __DIR__ . '/vendor/autoload.php';
+
+use LaraSlim\Commands\FormRequestCommand;
+use LaraSlim\Commands\MigrationCommand;
+use Symfony\Component\Console\Application;
+use LaraSlim\Commands\ModelCommand;
+use LaraSlim\Commands\ControllerCommand;
+
+$app = new Application('LaraSlim', '1.0.2');
+
+$app->add(new ControllerCommand());
+$app->add(new ModelCommand());
+$app->add(new MigrationCommand());
+$app->add(new FormRequestCommand());
+
+$app->run();

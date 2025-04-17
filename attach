@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker exec -it LaraSlim_app bash
+
+chmod +x up

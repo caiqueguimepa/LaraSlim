@@ -25,10 +25,9 @@ It also doesn't include a template engine, but you can integrate it with Blade (
 
 ## Requirements
 
-- PHP >= 8.4
+- PHP ^8.4
 - Docker
 - Composer
-
 ---
 
 ## Installation via Composer
@@ -47,31 +46,40 @@ composer create-project caiquebispo/laraslim example_app
    cd LaraSlim
    ```
 
-2. Start Docker containers:
+2. Build Docker containers:
    ```bash
-   docker compose up --build -d
+   sh build
    ```
 
-3. Access the container:
+3. Start the Docker containers:
    ```bash
-   docker exec -it LaraSlim_app bash
+   sh up
    ```
-
-4. Install dependencies:
+4. Attach the Docker containers:
+   ```bash
+   sh attach
+   ```
+5. Down the Docker containers:
+   ```bash
+   sh down
+   ```
+6. Install dependencies:
    ```bash
    composer install
    ```
-
-5. Copy the `.env` file:
+7. Copy the `.env` file:
    ```bash
    cp .env.exemple .env
    ```
-
-6. Run tests and checks:
+8. Run tests and checks:
    ```bash
    composer test
    ```
-
+---
+9. Show all available commands:
+   ```bash
+   php artisan-slim
+   ```
 ---
 
 ## Application Access
@@ -115,23 +123,22 @@ DB_PASSWORD=""
 
 Create a new migration:
 ```bash
-composer migration-create profiles
+php artisan-slim make:migration users
 ```
 
 Create a new model:
 ```bash
-composer model-create Profiles
+php artisan-slim make:model User
 ```
 
 Create a new controller:
 ```bash
-composer controller-create ProfileController
-composer controller-create Profiles/StoreController
+php artisan-slim make:controller UserController
 ```
 
 Create a new form request:
 ```bash
-composer request-create ProfileRequest
+php artisan-slim make:request UserRequest
 ```
 
 > Migrations are automatically executed when the container is started.
