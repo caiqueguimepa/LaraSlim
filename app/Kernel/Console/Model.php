@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LaraSlim\Karnel\Console;
+namespace LaraSlim\Kernel\Console;
 
 class Model
 {

@@ -42,11 +42,9 @@
             <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
                 The Lightweight PHP Framework
             </h1>
-
             <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                 LaraSlim combines the elegance of Laravel's structure with the simplicity and speed of Slim. Perfect for building lightweight APIs and web applications.
             </p>
-
             <div class="mt-10 flex items-center justify-center gap-x-6">
                 <a href="https://packagist.org/packages/caiquebispo/laraslim" class="rounded-md bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Get Started

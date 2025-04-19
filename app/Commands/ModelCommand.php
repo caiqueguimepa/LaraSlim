@@ -2,7 +2,7 @@
 
 namespace LaraSlim\Commands;
 
-use LaraSlim\Karnel\Console\Model;
+use LaraSlim\Kernel\Console\Model;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

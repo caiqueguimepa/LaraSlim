@@ -31,7 +31,10 @@
         "psr-4": {
             "LaraSlim\\": "app/",
             "Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "./config/helpers/functions.php"
+        ]
     },
     "require": {
         "php": "^8.4",

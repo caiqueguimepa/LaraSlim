@@ -2,7 +2,7 @@
 
 namespace LaraSlim\Http\Request;
 
-use LaraSlim\Karnel\Providers\BaseRequest;
+use LaraSlim\Kernel\Providers\BaseRequest;
 
 class UserRequest extends BaseRequest
 {

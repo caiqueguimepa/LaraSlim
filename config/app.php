@@ -1,7 +1,7 @@
 <?php
 return [
     'providers' =>[
-        \LaraSlim\Karnel\Providers\DatabaseServiceProvider::class,
-        \LaraSlim\Karnel\Providers\ValidationServiceProvider::class
+        \LaraSlim\Kernel\Providers\DatabaseServiceProvider::class,
+        \LaraSlim\Kernel\Providers\ValidationServiceProvider::class
     ]
 ];

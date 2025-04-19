@@ -4,7 +4,7 @@ namespace LaraSlim\Http\Controllers;
 
 use LaraSlim\DTOs\UserDTO;
 use LaraSlim\Http\Request\UserRequest;
-use LaraSlim\Karnel\Providers\Response;
+use LaraSlim\Kernel\Providers\Response;
 use LaraSlim\Services\UserServices;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace LaraSlim\Karnel\Providers;
+namespace LaraSlim\Kernel\Providers;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Psr\Container\ContainerInterface;
