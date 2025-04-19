@@ -1,6 +1,7 @@
 <?php
 
 
+use BladeSlim\Blade;
 use DI\Container;
 use LaraSlim\Karnel\Providers\AppServiceProvider;
 use Psr\Http\Message\ResponseInterface;
@@ -17,22 +18,15 @@ AppFactory::setContainer($container);
 $app = AppFactory::create();
 
 $app->addBodyParsingMiddleware();
+$blade = new Blade(
+    __DIR__ . '/../resources/views',
+    __DIR__ . '/../storage/cache',
+    $app->getResponseFactory()->createResponse()
+);
 
 $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response, array $args) {
-
-    $response->getBody()->write(json_encode([
-        'status' => 'success',
-        'message' => 'Welcome to the API',
-        'data' => [
-            'version' => '1.0.0',
-            'author' => 'Caique Bispo',
-            'description' => 'This is a sample API built with Slim Framework.',
-        ],
-    ]));
-
-    return $response
-            ->withHeader('Content-Type', 'application/json')
-            ->withStatus(200);
+    
+    return view('welcome');
 });
 
 require_once __DIR__ . './../routes/api.php';
