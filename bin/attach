@@ -2,4 +2,4 @@
 
 docker exec -it LaraSlim_app bash
 
-chmod +x up
+chmod +x /bin/attach

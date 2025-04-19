@@ -2,4 +2,4 @@
 
 docker compose build
 
-chmod +x up
+chmod +x /bin/bild
